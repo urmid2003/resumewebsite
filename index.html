@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .step .circle {
+            background-color: white;
+            border: 3px solid gray;
+            border-radius: 100%;
+            width: 20px;
+            /* +6 for border */
+            height: 20px;
+            display: inline-block;
+        }
+
+        .step .line {
+            top: 20px;
+            left: 9px;
+            /*   height: 120px; */
+            height: 100%;
+
+            position: absolute;
+            border-left: 3px solid gray;
+        }
+
+        .step.completed .circle {
+            visibility: visible;
+            background-color: rgb(6, 150, 215);
+            border-color: rgb(6, 150, 215);
+        }
+
+        .step.completed .line {
+            border-left: 3px solid rgb(6, 150, 215);
+        }
+
+        .step.active .line {
+            border-left: 3px solid rgb(6, 150, 215);
+        }
+
+        .step.active .circle {
+            visibility: visible;
+            border-color: rgb(6, 150, 215);
+        }
+
+        .step.empty .circle {
+            visibility: hidden;
+        }
+
+        .step.empty .line {
+            /*     visibility: hidden; */
+            /*   height: 150%; */
+            top: 0;
+            height: 150%;
+        }
+
+        .step-content {
+            margin-left: 40px;
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #ffffff33;
+            border-radius: 5px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #ffffff67;
+            border-radius: 5px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        @keyframes backgroundColorAnimation {
+            0% {
+                background-color: #1c1f3b;
+            }
+
+            25% {
+                background-color: #282c4d;
+            }
+
+            50% {
+                background-color: #3c3f68;
+            }
+
+            75% {
+                background-color: #4d4d80;
+            }
+
+            100% {
+                background-color: #4d4d80;
+            }
+        }
+
+        .animate-hover {
+            transition: all 0.3s ease;
+        }
+
+        .animate-hover:hover {
+            transform: translateY(-5px);
+        }
+
+        .animated-bg {
+            animation: backgroundColorAnimation 10s infinite alternate;
+            background-size: cover;
+            background-blend-mode: multiply;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .flipbox-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .box {
+            perspective: 1000px;
+            height: 400px;
+        }
+
+        .box-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+
+        .box:hover .box-inner {
+            transform: rotateY(180deg);
+        }
+
+        .box-front,
+        .box-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .box-front {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+        }
+
+        .box-back {
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            transform: rotateY(180deg);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .slide-in {
+            opacity: 0;
+            transform: translateY(50px);
+            width: 90%;
+            height: 90%;
+            animation: slideIn 1s ease-out forwards;
+
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-2xl font-bold">Urmi<span class="text-blue-500">Dangi</span></a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-blue-500 transition-colors">Home</a>
+                    <a href="#about" class="hover:text-blue-500 transition-colors">About</a>
+                    <a href="#projects" class="hover:text-blue-500 transition-colors">Projects</a>
+                    <a href="#experience" class="hover:text-blue-500 transition-colors">Experience</a>
+                    <a href="#contact" class="hover:text-blue-500 transition-colors">Contact</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen parallax flex items-center animated-bg">
+        <div class="container mx-auto px-6 py-20">
+            <div class="float">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Hello, I'm <span class="text-blue-500">Urmi Dangi</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8" id="visitCounter">
+                    This page has been visited <span class="font-bold" id="visits">0</span> times.
+                </p>
+                <p class="text-xl md:text-2xl mb-8">Software Developer & Problem Solver</p>
+                <a href="#contact" class="bg-blue-500 hover:bg-blue-600 px-8 py-3 rounded-full transition-colors">Get in
+                    touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="slide-in">
+                    <img src="assets/resumeurmi.jpeg" alt="Developer" class="rounded-lg shadow-xl">
+                </div>
+                <div class="space-y-6 slide-in">
+                    <p>Greetings! <br /> I completed
+                        my undergraduate degree
+                        in IT and am currently working as an SDE I at a startup. I handle all tasks assigned to me with
+                        dedication and always strive to overachieve. I strongly believe in continuous learning and
+                        gaining
+                        insights from others. Over time, I have significantly improved my Python skills and have been
+                        actively
+                        working with FastAPI and React.js to develop various projects.
+                        <br /> <br />
+                        In the past 3-4 months, I have expanded my expertise beyond creating UIs and APIs to include web
+                        scraping with Scrapy and automation. This shift has broadened my interests and allowed me to
+                        explore new
+                        challenges. I have also designed dashboards for better UI and data visualization. Currently, I
+                        am
+                        learning cloud computing and enjoy competitive programming as well. I am always eager to learn
+                        new
+                        technologies and solve complex problems.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-gray-700 rounded-lg">
+                            <h3 class="font-bold mb-2">Frontend</h3>
+                            <p>JavaScript, React.js, Tailwind, MUI</p>
+                        </div>
+                        <div class="p-4 bg-gray-700 rounded-lg">
+                            <h3 class="font-bold mb-2">Backend</h3>
+                            <p>Python(FastAPI), MySQL, PostgreSQL, API Creation & Optimization</p>
+                        </div>
+                        <div class="p-4 bg-gray-700 rounded-lg">
+                            <h3 class="font-bold mb-2">Technologies</h3>
+                            <p>AWS, Github, web scraping (Scrapy), Automation</p>
+                        </div>
+                        <div class="p-4 bg-gray-700 rounded-lg">
+                            <h3 class="font-bold mb-2">Hobby</h3>
+                            <p>Competitive Programming</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass p-6 rounded-2xl project-card">
+                    <img src="assets/scrapy.webp" alt="">
+                    <h3 class="text-xl font-bold mb-2 mt-4">Web scrapping(zomato website pages)</h3>
+                    <p class="mb-4">Scraped reviews and menu data from Zomato while using proxies to avoid blocks.
+                        Automated the Scrapy scripts to run daily via cron and later developed multiple dashboards to
+                        visualize the extracted data effectively.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/urmid2003/scrapy" class="text-sm hover:text-blue-200"><i class="bi bi-github"></i> Code</a>
+                        
+                    </div>
+                </div>
+                <div class="glass p-6 rounded-2xl project-card">
+                    <div class="bg-blue-600 h-48 rounded-xl mb-4"></div>
+                    <h3 class="text-xl font-bold mb-2">Moneymats(Personal Finance management website)</h3>
+                    <p class="mb-4">A platform that allows users to create virtual envelopes for budgeting different
+                        expenses like groceries, travel, and more. Built using React.js, Python, AWS RDS, and GitHub.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-sm hover:text-blue-200"><i class="bi bi-github"></i> Code</a>
+                        <a href="#" class="text-sm hover:text-blue-200"><i class="bi bi-link-45deg"></i> Demo</a>
+                    </div>
+                </div>
+                <div class="glass p-6 rounded-2xl project-card">
+                    <div class="bg-blue-700 h-48 rounded-xl mb-4"></div>
+                    <h3 class="text-xl font-bold mb-2">Portfolio website</h3>
+                    <p class="mb-4">Built a portfolio website to explore cloud hosting, using HTML, CSS, and JavaScript.
+                        Deployed it on AWS S3 and integrated AWS Lambda for serverless functionality</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-sm hover:text-blue-200"><i class="bi bi-github"></i> Code</a>
+                        <a href="#" class="text-sm hover:text-blue-200"><i class="bi bi-link-45deg"></i> Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4 fade-in">
+            <h2 class="text-3xl font-bold mb-12 text-center">Experience</h2>
+            <div class="space-y-8">
+                <div class="p-6 rounded-lg animate-hover" style="background-color: #4d4d80;">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold">SDE I </h3>
+                            <p class="text-[#63B3ED]">Restaverse</p>
+                        </div>
+                        <span class="text-gray-400">May 2024 - Present</span>
+                    </div>
+                    <div style="width: 80%; margin-left: 20px;">
+                        <p class="text-gray-300">
+                        <ul style="list-style-type: disc;">
+                            <li><b>Web Development with React.js and Python</b><br />
+                                Developed responsive web pages like the AI-response page and
+                                Careers submission form for Restaverse using React.js and
+                                Python. Integrated AWS S3 for resume uploads, SQL databases for
+                                storage, and automated email notifications to streamline
+                                workflows.</li>
+                            <li><b>Restaurant Review and Menu Scraping</b><br />
+                                Built Scrapy spiders to extract reviews and menus from Zomato,
+                                EazyDiner, and Magicpin. Automated daily scraping with Python
+                                cron jobs, storing data in a database for visualization on
+                                dashboards with graphs and insights for clients.</li>
+                            <li><b>Restaurant Management Dashboard</b><br />
+                                Contributed to Restaverse's dashboard by implementing automation
+                                settings, offline review submission, and keyword detection
+                                systems that trigger automated client notifications. Designed UI
+                                components for competitor analysis and client metrics
+                                visualization.</li>
+                            <li><b>Automation and Scaling Solutions</b><br />
+                                Integrated ScrapeOps with Scrapyd on AWS EC2 for scalable
+                                scraping solutions. Automated multi-client job scheduling and
+                                developed APIs for efficient data handling, ensuring seamless
+                                operations and continuous product enhancements.</li>
+
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 rounded-lg animate-hover" style="background-color: #4d4d80;">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold">SDE intern</h3>
+                            <p class="text-[#63B3ED]">JIO Platforms Ltd</p>
+                        </div>
+                        <span class="text-gray-400">Apr 2022 - Oct 2022</span>
+                    </div>
+                    <div style="width: 80%; margin-left: 20px;">
+                        <p class="text-gray-300">
+                        <ul style="list-style-type: disc;">
+                            <li>Contributed as part of the security team on a live project
+                                called JIO NET SENSOR.</li>
+                            <li>Client-Side UI Development: Developed client-facing UI
+                                components using React.js and MUI library, including a
+                                comprehensive form for client data input.</li>
+                            <li>Nested Page with Steppers: Created a nested, step-by-step
+                                interface using Stepper components for streamlined form
+                                submission.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center">Get In Touch</h2>
+            <div class="max-w-md mx-auto glass-effect p-8 rounded-lg">
+                <form class="space-y-6">
+                    <div>
+                        <label class="block mb-2">Name</label>
+                        <input type="text" class="w-full p-3 bg-gray-700 rounded-lg" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Email</label>
+                        <input type="email" class="w-full p-3 bg-gray-700 rounded-lg" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Message</label>
+                        <textarea class="w-full p-3 bg-gray-700 rounded-lg h-32" required></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-blue-500 hover:bg-blue-600 py-3 rounded-lg transition-colors">Send
+                        Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-6 text-center bg-gray-800">
+        <p>© 2023 Developer Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.onload = function getUser() {
+            fetch('https://ohzoxi79nk.execute-api.eu-north-1.amazonaws.com/dev')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error status: ${response.status}`);
+                    }
+                    
+                    return response.json();
+                })
+                .then(result => {
+                    console.log(result);
+                    console.log(result.body)
+                    visits=result.body
+                    document.getElementById('visits').innerHTML=visits
+                    
+
+                })
+                .catch(err => console.log(err));
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.slide-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
