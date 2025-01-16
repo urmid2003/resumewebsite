@@ -9,257 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <style>
-        * {
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        .step .circle {
-            background-color: white;
-            border: 3px solid gray;
-            border-radius: 100%;
-            width: 20px;
-            /* +6 for border */
-            height: 20px;
-            display: inline-block;
-        }
-
-        .step .line {
-            top: 20px;
-            left: 9px;
-            /*   height: 120px; */
-            height: 100%;
-
-            position: absolute;
-            border-left: 3px solid gray;
-        }
-
-        .step.completed .circle {
-            visibility: visible;
-            background-color: rgb(6, 150, 215);
-            border-color: rgb(6, 150, 215);
-        }
-
-        .step.completed .line {
-            border-left: 3px solid rgb(6, 150, 215);
-        }
-
-        .step.active .line {
-            border-left: 3px solid rgb(6, 150, 215);
-        }
-
-        .step.active .circle {
-            visibility: visible;
-            border-color: rgb(6, 150, 215);
-        }
-
-        .step.empty .circle {
-            visibility: hidden;
-        }
-
-        .step.empty .line {
-            /*     visibility: hidden; */
-            /*   height: 150%; */
-            top: 0;
-            height: 150%;
-        }
-
-        .step-content {
-            margin-left: 40px;
-            margin-bottom: 40px;
-            display: inline-block;
-        }
-
-        /* width */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        /* Track */
-        ::-webkit-scrollbar-track {
-            background: #ffffff33;
-            border-radius: 5px;
-        }
-
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #ffffff67;
-            border-radius: 5px;
-        }
-
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        .font-poppins {
-            font-family: 'Poppins', sans-serif;
-        }
-
-
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        @keyframes backgroundColorAnimation {
-            0% {
-                background-color: #1c1f3b;
-            }
-
-            25% {
-                background-color: #282c4d;
-            }
-
-            50% {
-                background-color: #3c3f68;
-            }
-
-            75% {
-                background-color: #4d4d80;
-            }
-
-            100% {
-                background-color: #4d4d80;
-            }
-        }
-
-        .animate-hover {
-            transition: all 0.3s ease;
-        }
-
-        .animate-hover:hover {
-            transform: translateY(-5px);
-        }
-
-        .animated-bg {
-            animation: backgroundColorAnimation 10s infinite alternate;
-            background-size: cover;
-            background-blend-mode: multiply;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        .gradient-bg {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .flipbox-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-        }
-
-        .box {
-            perspective: 1000px;
-            height: 400px;
-        }
-
-        .box-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.8s;
-        }
-
-        .box:hover .box-inner {
-            transform: rotateY(180deg);
-        }
-
-        .box-front,
-        .box-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 1rem;
-            padding: 2rem;
-        }
-
-        .box-front {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-        }
-
-        .box-back {
-            background: linear-gradient(135deg, #ff7eb3, #ff758c);
-            transform: rotateY(180deg);
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        .float {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .slide-in {
-            opacity: 0;
-            transform: translateY(50px);
-            width: 90%;
-            height: 90%;
-            animation: slideIn 1s ease-out forwards;
-
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body class="bg-gray-900 text-white">
@@ -360,8 +110,9 @@
                         visualize the extracted data effectively.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="https://github.com/urmid2003/scrapy" class="text-sm hover:text-blue-200"><i class="bi bi-github"></i> Code</a>
-                        
+                        <a href="https://github.com/urmid2003/scrapy" class="text-sm hover:text-blue-200"><i
+                                class="bi bi-github"></i> Code</a>
+
                     </div>
                 </div>
                 <div class="glass p-6 rounded-2xl project-card">
@@ -458,68 +209,40 @@
             </div>
         </div>
     </section>
-
+    <div id="toast" class="toast"></div>
     <!-- Contact Section -->
     <section id="contact" class="py-20">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold mb-12 text-center">Get In Touch</h2>
             <div class="max-w-md mx-auto glass-effect p-8 rounded-lg">
-                <form class="space-y-6">
+                <form id="contactForm" class="space-y-6">
                     <div>
                         <label class="block mb-2">Name</label>
-                        <input type="text" class="w-full p-3 bg-gray-700 rounded-lg" required>
+                        <input id="name" type="text" class="w-full p-3 bg-gray-700 rounded-lg" required>
                     </div>
                     <div>
                         <label class="block mb-2">Email</label>
-                        <input type="email" class="w-full p-3 bg-gray-700 rounded-lg" required>
+                        <input id="email" type="email" class="w-full p-3 bg-gray-700 rounded-lg" required>
                     </div>
                     <div>
                         <label class="block mb-2">Message</label>
-                        <textarea class="w-full p-3 bg-gray-700 rounded-lg h-32" required></textarea>
+                        <textarea id="message" class="w-full p-3 bg-gray-700 rounded-lg h-32" required></textarea>
                     </div>
                     <button type="submit"
-                        class="w-full bg-blue-500 hover:bg-blue-600 py-3 rounded-lg transition-colors">Send
-                        Message</button>
+                        class="w-full bg-blue-500 hover:bg-blue-600 py-3 rounded-lg transition-colors">
+                        Send Message
+                    </button>
                 </form>
             </div>
         </div>
     </section>
 
+
     <footer class="py-6 text-center bg-gray-800">
         <p>© 2023 Developer Portfolio. All rights reserved.</p>
     </footer>
+    <script src="index.js"></script>
 
-    <script>
-        window.onload = function getUser() {
-            fetch('https://ohzoxi79nk.execute-api.eu-north-1.amazonaws.com/dev')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Error status: ${response.status}`);
-                    }
-                    
-                    return response.json();
-                })
-                .then(result => {
-                    console.log(result);
-                    console.log(result.body)
-                    visits=result.body
-                    document.getElementById('visits').innerHTML=visits
-                    
-
-                })
-                .catch(err => console.log(err));
-        };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.slide-in').forEach(el => observer.observe(el));
-    </script>
 </body>
 
 </html>
