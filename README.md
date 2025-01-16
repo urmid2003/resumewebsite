@@ -23,6 +23,11 @@ This portfolio project was developed to showcase my skills and provide a platfor
 ### Amazon SES (Simple Email Service)
 - Configured to send an email with the content of the "Contact Us" form when a user submits it.
 
+### Deployment
+- This website is hosted as a static website, stored in an AWS S3 bucket.
+
+
+
 ## Flowchart
 Below is the flowchart illustrating the functionality:
 
@@ -37,8 +42,7 @@ Below is the flowchart illustrating the functionality:
 4. Trigger SES to send an email notification.
 5. Show a toast notification to the user.
 
-### Diagram
-Flow chart
+### Flow chart
 ![personalcv](https://github.com/user-attachments/assets/49017b14-8c60-45e3-abff-fbd431988a3e)
 
 
