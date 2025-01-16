@@ -38,11 +38,9 @@ Below is the flowchart illustrating the functionality:
 5. Show a toast notification to the user.
 
 ### Diagram
-```
-[Website Load] --> [Fetch Visit Count from DynamoDB] --> [Display Visit Count]
-[Contact Form Submission] --> [Validate Inputs] --> [Submit Data to API]
-  --> [Store in DynamoDB] --> [Send Email via SES] --> [Show Toast Notification]
-```
+Flow chart
+![personalcv](https://github.com/user-attachments/assets/49017b14-8c60-45e3-abff-fbd431988a3e)
+
 
 ## Conclusion
 This portfolio project not only showcases my skills but also demonstrates my understanding of integrating frontend and backend services using AWS. Feel free to explore the sections and connect with me through the "Contact" form!
